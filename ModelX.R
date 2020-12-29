@@ -7,7 +7,7 @@ for (i in 1:1000)
   X <- rep(seasonality, ceiling(60/seasPeriod))[1:60] + rnorm(60, 0, 0.1)
   
   #ML method for finding periodicity
-  ac <- LessBiasACF(X) #LessBiasACF(X) #c(acf(X, plot = FALSE, length(X)/2)$acf)
+  ac <- ACF(X)
   pksArgs <- which(diff(sign(diff(ac, na.pad = FALSE)), na.pad = FALSE) < 0) #Find all crests
   pksArgs <- pksArgs[which(ac[pksArgs+1] > 0)] #Remove negative crests (want positive correlation with lags)
   #Want to pick smallest periodicity that works (for more smoothening)
